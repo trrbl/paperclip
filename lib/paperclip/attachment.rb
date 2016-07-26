@@ -465,6 +465,7 @@ module Paperclip
     end
 
     def reset_file_if_original_reprocessed
+      return if @queued_for_write[:original].nil?
       instance_write(:file_size, @queued_for_write[:original].size)
       assign_fingerprint { @queued_for_write[:original].fingerprint }
       reset_updater
